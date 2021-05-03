@@ -1,0 +1,176 @@
+# i3 Config by yChen
+
+# font (window titles and bar)
+font pango: Source Sans Pro 10
+
+# use WIN key
+set $mod Mod4
+set $alt Mod1
+
+# Set Arrow keys
+set $up k
+set $down j
+set $left h
+set $right l
+
+# split in horizontal orientation
+bindsym $mod+v split v
+
+# split in vertical orientation
+bindsym $mod+Shift+v split h
+
+bindsym $mod+Shift+q kill
+
+# Move Window
+bindsym $mod+Shift+$left    move left
+bindsym $mod+Shift+$down    move down
+bindsym $mod+Shift+$up      move up
+bindsym $mod+Shift+$right   move right
+
+# Window Resize
+mode "resize" {
+	  bindsym $up resize shrink height 5 px or 5 ppt
+	  bindsym $down resize grow height 5 px or 5 ppt
+	  bindsym $right resize grow width 5 px or 5 ppt
+	  bindsym $left resize shrink width 5 px or 5 ppt
+    bindsym Return mode "default"
+}
+bindsym $mod+Shift+r mode "resize"
+
+# Window focus
+bindsym $mod+$left  focus left
+bindsym $mod+$down  focus down
+bindsym $mod+$up    focus up
+bindsym $mod+$right focus right
+
+focus_follows_mouse no
+
+# Window Layout 
+bindsym $mod+f fullscreen toggle
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Floating
+bindsym $mod+$alt+f floating toggle
+bindsym $mod+$alt+e focus mode_toggle
+floating_modifier $mod
+
+#smart_gaps on
+gaps inner 12
+gaps outer 12
+
+# Move between workspace
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+
+bindsym $mod+Tab workspace next
+bindsym $mod+grave workspace prev
+
+# Move workspace
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+
+bindsym $mod+Shift+Tab move container to workspace next
+bindsym $mod+Shift+grave move container to workspace prev
+
+smart_borders on
+hide_edge_borders none
+popup_during_fullscreen smart
+
+# Exit i3
+#bindsym $mod+Shift+e exit
+
+# Startup Applications
+exec_always --no-startup-id feh --bg-fill ~/.config/i3/wallpaper.jpg
+exec --no-startup-id compton --config ~/.config/compton.conf
+#exec --no-startup-id volumeicon
+# polybar
+#exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#bindsym $mod+b exec xdo show -n polybar
+#bindsym $mod+Shift+b exec xdo hide -n polybar
+#exec --no-startup-id /usr/share/qv2ray/qv2ray
+#exec_always --no-startup-id /usr/bin/setxkbmap -option "ctrl:swapcaps"
+# (moved to ~/.config/plasma-workspace/env/swap-key.sh)
+
+# Application Shortcuts
+bindsym $mod+Return exec --no-startup-id konsole
+bindsym $mod+Shift+Return exec dolphin
+# rofi
+bindsym $mod+r exec --no-startup-id rofi -font "Lucida Grande 11" -lines 12 -padding 18 -width 60 -location 0 -show drun -sidebar-mode -columns 3 -icon-theme "Os-Catalina-Night" -show-icons
+#bindsym $mod+r exec --no-startup-id rofi -show drun
+#bindsym $mod+Tab exec --no-startup-id rofi -show window
+#bindsym $mod+Shift+Return exec "rofi -show file-browser"
+# scrot: screenshot
+bindsym $mod+x --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png -e 'xclip -selection c -t image/png < $f'"
+bindsym $mod+Shift+x --release exec "scrot -s /tmp/screenshot-$(date +%F_%T).png"
+
+# --------------------color begins----------------------------
+#magenta colors(for window~)
+#:::::::::::::::: MARCO DE VENTANA ::::::::::::::::::#
+################################################################
+# class                          border  backgr  text   indicator child_border
+#! client.focused                       #607d8b #607d8b #DFDFDF  #dddddd   #607d8b
+#! client.focused_inactive      #263238 #263238 #9a9b9c  #111111   #263238
+#! client.unfocused             #455a64 #455a64 #a1a1a1  #bfbfbf   #455a64
+client.urgent                   #4a4b4c #4a4b4c #fdfdfd  #fbfbfb   #4a4c4b
+client.placeholder              #000000 #0c0c0c #ffffff  #000000   #0c0c0c
+client.background               #111111
+################################################################
+#magenta colors
+
+# focused border-1
+# class                 border  backgr. text    indicator child_border
+#! client.focused          #B5BD68 #B5BD68 #ffffff #B5BD68   #B5BD68
+#! client.focused_inactive #282A2E #282A2E #ffffff #282A2E #282A2E
+
+# focused border-2(white.)(prefer)
+# class                 border  backgr. text    indicator child_border
+client.focused          #888888 #555555 #bbbbbb #2e9ef4
+client.focused_inactive #333333 #555555 #bbbbbb #484e50
+client.unfocused #333333 #333333 #888888 #292d2e
+
+# focused border-3(orange)
+#!client.focused          #F7CA88 #F7CA88 #ffffff #F7CA88
+#!client.focused_inactive #000000 #000000 #ffffff #ffffff
+#!client.unfocused #000000 #000000 #ffffff #ffffff
+
+# focused border-4(blue)(white background)
+#!client.focused          #888a85 #396EB4 #ffffff #2e9ef4
+#!client.focused_inactive #888a85 #E4E4E4 #888a85 #484e50
+#!client.unfocused #888a85 #E4E4E4 #888a85 #484e50
+
+# --------------------color ends------------------------------
+
+default_border pixel 1
+default_floating_border normal
+title_align center
+for_window [class=".*"] title_format "%title"
+
+# KDE-i3 Integration
+for_window [title="Desktop — Plasma"] kill; floating enable; border none
+for_window [class="plasmashell"] floating enable;
+for_window [class="Plasma"] floating enable; border none
+for_window [title="plasma-desktop"] floating enable; border none
+for_window [title="win7"] floating enable; border none
+for_window [class="krunner"] floating enable; border none
+for_window [class="Kmix"] floating enable; border none
+for_window [class="Klipper"] floating enable; border none
+for_window [class="Plasmoidviewer"] floating enable; border none
+for_window [class="(?i)*nextcloud*"] floating disable
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
+no_focus [class="plasmashell" window_type="notification"] 

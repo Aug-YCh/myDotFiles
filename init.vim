@@ -8,7 +8,8 @@ set incsearch
 set number
 set relativenumber
 inoremap jk <ESC>
-:set shiftwidth=4
-:set autoindent
-:set smartindent
+set shiftwidth=4
+set autoindent
+set smartindent
+set spell on
 "let mapleader="'"

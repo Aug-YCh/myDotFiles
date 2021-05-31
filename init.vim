@@ -11,5 +11,5 @@ inoremap jk <ESC>
 set shiftwidth=4
 set autoindent
 set smartindent
-set spell on
+"set spell on
 "let mapleader="'"
